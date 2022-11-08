@@ -18,7 +18,7 @@ C:\Trabalho\TestePratico\FI.WebAtividadeEntrevista\FI.WebAtividadeEntrevista\FI.
 C:\Trabalho\TestePratico\FI.WebAtividadeEntrevista\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.pdb
 D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.dll
 D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.pdb
-D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.AssemblyReference.cache
 D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.CoreCompileInputs.cache
 D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.dll
 D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.pdb
+D:\WebDev\teste-fullstack\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.AssemblyReference.cache

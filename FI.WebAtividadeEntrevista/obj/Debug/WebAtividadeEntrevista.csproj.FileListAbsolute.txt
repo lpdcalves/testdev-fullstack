@@ -200,4 +200,3 @@ D:\WebDev\teste-fullstack\FI.WebAtividadeEntrevista\obj\Debug\WebAtividadeEntrev
 D:\WebDev\teste-fullstack\FI.WebAtividadeEntrevista\obj\Debug\WebAtividadeEntrevista.csproj.CoreCompileInputs.cache
 D:\WebDev\teste-fullstack\FI.WebAtividadeEntrevista\obj\Debug\WebAtividadeEntrevista.dll
 D:\WebDev\teste-fullstack\FI.WebAtividadeEntrevista\obj\Debug\WebAtividadeEntrevista.pdb
-D:\WebDev\teste-fullstack\FI.WebAtividadeEntrevista\obj\Debug\WebAtividadeEntrevista.csproj.CopyComplete

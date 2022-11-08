@@ -58,6 +58,22 @@ namespace WebAtividadeEntrevista.Controllers
             }
         }
 
+        public JsonResult VerificarCpfExiste(string cpf)
+        {
+            BoCliente bo = new BoCliente();
+
+            if (bo.VerificarExistencia(cpf))
+            {
+                Response.StatusCode = 400;
+                return Json("Um usuário já foi cadastrado com esse CPF, tente outro CPF");
+            }
+            else
+            {
+
+                return Json("Cadastro efetuado com sucesso", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [HttpPost]
         public JsonResult Alterar(ClienteModel model)
         {
@@ -106,7 +122,7 @@ namespace WebAtividadeEntrevista.Controllers
                 {
                     Id = cliente.Id,
                     CEP = cliente.CEP,
-                    CPF = model.CPF,
+                    CPF = cliente.CPF,
                     Cidade = cliente.Cidade,
                     Email = cliente.Email,
                     Estado = cliente.Estado,
