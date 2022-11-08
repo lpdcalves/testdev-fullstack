@@ -1,4 +1,5 @@
-﻿<form id="formCadastro" method="post">
+﻿
+<form id="formCadastro" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -17,7 +18,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="CPF">CPF:</label>
-                <input required="required" type="text" class="form-control" id="CPF" name="CPF" placeholder="010.011.111-00" maxlength="14">
+                <input required="required" type="text" class="form-control" id="CPF" name="CPF" placeholder="Ex.: 010.011.111-00" maxlength="14">
             </div>
         </div>
         <div class="col-md-6">
@@ -77,13 +78,92 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-6">
+            <div class="pull-left">
+                <button class="btn btn-sm btn-light" data-toggle="modal" data-target="#beneficiariosModal">BENEFICIÁRIOS</button>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="pull-right">
                 <button type="submit" class="btn btn-sm btn-success">Salvar</button>
                 @Html.ActionLink("Voltar", "Index", "Cliente", new { }, new { @class = "btn btn-sm btn-danger" })
             </div>
         </div>
     </div>
-
-
 </form>
+
+<div class="modal fade" id="beneficiariosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Beneficiários</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formCadastroBeneficiario" method="post">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="CPF">CPF:</label>
+                                <input required="required" type="text" class="form-control" id="CPF_Ben" name="CPF_Ben" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Nome">Nome:</label>
+                                <input required="required" type="text" class="form-control" id="Nome_Ben" name="Nome_Ben" placeholder="Ex.: João" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-sm btn-success">Incluir</button>
+                        </div>
+                    </div>
+                </form>
+
+                <table id="gridBeneficiarios" class="table"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="alterarBeneficiariosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alterar Beneficiários</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formAlterarBeneficiario" method="post">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="CPF">CPF:</label>
+                                <input required="required" type="text" class="form-control" id="CPF_Ben" name="CPF_Ben" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Nome">Nome:</label>
+                                <input required="required" type="text" class="form-control" id="Nome_Ben" name="Nome_Ben" placeholder="Ex.: João" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-sm btn-success">Alterar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 ﻿using FI.AtividadeEntrevista.BLL;
+using FI.AtividadeEntrevista.DML;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,12 @@ namespace WebAtividadeEntrevista.Models
         public override bool IsValid(object value)
         {
             string cpf = (string) value;
+
+            if (cpf == null)
+            {
+                return false;
+            }
+
             cpf = cpf.Trim().Replace(".", "").Replace("-", "");
 
             if (cpf.Length != 11)
@@ -27,7 +34,10 @@ namespace WebAtividadeEntrevista.Models
 
             for (int i = 1; i < 11 && igual; i++)
             {
-                if (cpf[i] != cpf[0]) igual = false;
+                if (cpf[i] != cpf[0]) 
+                { 
+                    igual = false; 
+                }
             }
 
             if (igual || cpf == "12345678909")
@@ -85,29 +95,6 @@ namespace WebAtividadeEntrevista.Models
             }
 
             return true;
-        }
-    }
-
-    public class CpfIsNewToDB : ValidationAttribute
-    {
-        public CpfIsNewToDB() { }
-
-        public string GetErrorMessage() => $"Seu CPF já foi cadastrado em outro cliente, tente outro CPF";
-
-        public override bool IsValid(object value)
-        {
-            string cpf = (string)value;
-
-            BoCliente bo = new BoCliente();
-
-            if (bo.VerificarExistencia(cpf))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
         }
     }
 }

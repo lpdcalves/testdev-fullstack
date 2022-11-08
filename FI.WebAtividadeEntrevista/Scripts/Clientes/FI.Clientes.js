@@ -26,7 +26,7 @@ $(document).ready(function () {
             },
             success:
             function (r) {
-                ModalDialog("Sucesso!", r)
+                ModalDialog("Sucesso!", r.Mensagem)
                 $("#formCadastro")[0].reset();
             }
         });

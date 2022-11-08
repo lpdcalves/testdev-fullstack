@@ -18,15 +18,15 @@ namespace WebAtividadeEntrevista.Models
         /// CEP
         /// </summary>
         [Required]
+        [RegularExpression(@"[0-9]{5}[-][0-9]{3}", ErrorMessage = "Seu CEP não está no formato correto. Lembre de inserir o hífen \"-\" no local correto.")]
         public string CEP { get; set; }
 
         /// <summary>
         /// CPF
         /// </summary>
         [Required]
-        [RegularExpression(@"[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[-][0-9]{2}", ErrorMessage = "Seu CPF não está no formato correto (verifique a pontuação)")]
-        [CpfIsValid(ErrorMessage = "Seu CPF não é válido")]
-        [CpfIsNewToDB(ErrorMessage = "Esse CPF já foi cadastrado em outro cliente, tente outro CPF")]
+        [RegularExpression(@"[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[-][0-9]{2}", ErrorMessage = "Seu CPF não está no formato correto (verifique a pontuação).")]
+        [CpfIsValid(ErrorMessage = "Seu CPF não é válido.")]
         public string CPF { get; set; }
 
         /// <summary>

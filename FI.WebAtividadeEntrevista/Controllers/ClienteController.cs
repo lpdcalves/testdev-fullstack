@@ -53,24 +53,13 @@ namespace WebAtividadeEntrevista.Controllers
                     Telefone = model.Telefone
                 });
 
-           
-                return Json("Cadastro efetuado com sucesso");
-            }
-        }
+                var resultado = new
+                {
+                    Mensagem = "Cadastro efetuado com sucesso",
+                    Id = model.Id
+                };
 
-        public JsonResult VerificarCpfExiste(string cpf)
-        {
-            BoCliente bo = new BoCliente();
-
-            if (bo.VerificarExistencia(cpf))
-            {
-                Response.StatusCode = 400;
-                return Json("Um usuário já foi cadastrado com esse CPF, tente outro CPF");
-            }
-            else
-            {
-
-                return Json("Cadastro efetuado com sucesso", JsonRequestBehavior.AllowGet);
+                return Json(resultado);
             }
         }
 
@@ -90,22 +79,29 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                bo.Alterar(new Cliente()
+                if (bo.VerificarExistencia(model.CPF, model.Id))
                 {
-                    Id = model.Id,
-                    CEP = model.CEP,
-                    CPF = model.CPF,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
-                });
-                               
-                return Json("Cadastro alterado com sucesso");
+                    return Json($"Já existe um cliente com CPF: {model.CPF}. Tente outro CPF");
+                }
+                else
+                {
+                    bo.Alterar(new Cliente()
+                    {
+                        Id = model.Id,
+                        CEP = model.CEP,
+                        CPF = model.CPF,
+                        Cidade = model.Cidade,
+                        Email = model.Email,
+                        Estado = model.Estado,
+                        Logradouro = model.Logradouro,
+                        Nacionalidade = model.Nacionalidade,
+                        Nome = model.Nome,
+                        Sobrenome = model.Sobrenome,
+                        Telefone = model.Telefone
+                    });
+
+                    return Json("Cadastro alterado com sucesso");
+                }
             }
         }
 
