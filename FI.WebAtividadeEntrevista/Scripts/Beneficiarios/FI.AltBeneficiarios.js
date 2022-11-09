@@ -23,7 +23,7 @@ $(document).ready(function () {
             function (r) {
                 ModalDialog("Sucesso!", r)
                 $("#formAlterarBeneficiario")[0].reset();
-                window.location.href = urlRetorno;
+                location.reload();
             }
         });
     })
@@ -36,6 +36,28 @@ $(document).on("click", ".abrir-alterarModal", function () {
     alterarBeneficiarioID = $(this).data('id');
     $(".modal-body #CPF_Ben").val(cpf);
     $(".modal-body #Nome_Ben").val(nome);
+});
+
+$(document).on("click", ".deletarModal", function () {
+    var id = $(this).data('id');
+    $.ajax({
+        url: urlExclusaoBen,
+        method: "DELETE",
+        data: {
+            "Id": id,
+        },
+        error:
+            function (r) {
+                if (r.status == 400)
+                    ModalDialog("Ocorreu um erro", r.responseJSON);
+                else if (r.status == 500)
+                    ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+            },
+        success:
+            function (r) {
+                ModalDialog("Sucesso!", r)
+            }
+    });
 });
 
 function ModalDialog(titulo, texto) {

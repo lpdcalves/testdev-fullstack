@@ -55,7 +55,7 @@ namespace WebAtividadeEntrevista.Controllers
 
                 var resultado = new
                 {
-                    Mensagem = "Cadastro efetuado com sucesso",
+                    Mensagem = "Cadastro de Cliente efetuado com sucesso",
                     Id = model.Id
                 };
 
@@ -100,7 +100,13 @@ namespace WebAtividadeEntrevista.Controllers
                         Telefone = model.Telefone
                     });
 
-                    return Json("Cadastro alterado com sucesso");
+                    var resultado = new
+                    {
+                        Mensagem = "Cadastro de Cliente alterado com sucesso",
+                        Id = model.Id
+                    };
+
+                    return Json(resultado);
                 }
             }
         }

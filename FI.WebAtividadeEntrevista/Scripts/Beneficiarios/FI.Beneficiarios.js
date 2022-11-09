@@ -82,6 +82,7 @@ $(document).ready(function () {
 
                         ModalDialog("Sucesso!", r.Mensagem)
                         $("#formCadastro")[0].reset();
+                        location.reload();
                     }
             });
         }

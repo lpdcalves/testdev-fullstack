@@ -42,7 +42,7 @@ namespace WebAtividadeEntrevista.Controllers
                     });
 
 
-                    return Json("Cadastro efetuado com sucesso");
+                    return Json("Cadastro de Beneficiario efetuado com sucesso");
                 }
             }
         }
@@ -77,7 +77,8 @@ namespace WebAtividadeEntrevista.Controllers
         [HttpDelete]
         public JsonResult Excluir(long id)
         {
-            Response.StatusCode = 204;
+            BoBeneficiario bo = new BoBeneficiario();
+            bo.Excluir(id);
             return Json("Beneficiário excluído com sucesso.");
         }
 

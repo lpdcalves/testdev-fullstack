@@ -29,7 +29,7 @@ $(document).ready(function () {
                     Excluir: {
                         title: '',
                         display: function (data) {
-                            return '<button onclick="window.location.href=\'' + urlExclusaoBen + '/' + data.record.Id + '\'" class="btn btn-primary btn-sm">Excluir</button>';
+                            return '<button class="deletarModal btn btn-primary btn-sm" data-id="' + data.record.Id + '" > Excluir</button > ';
                         }
                     }
                 }
