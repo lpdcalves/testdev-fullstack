@@ -20,10 +20,11 @@ $(document).ready(function () {
                     ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
             },
             success:
-            function (r) {
+                function (r) {
+                $('#alterarBeneficiariosModal').modal('hide');
                 ModalDialog("Sucesso!", r)
                 $("#formAlterarBeneficiario")[0].reset();
-                location.reload();
+                updateBeneficiariosList();
             }
         });
     })
@@ -55,7 +56,8 @@ $(document).on("click", ".deletarModal", function () {
             },
         success:
             function (r) {
-                ModalDialog("Sucesso!", r)
+                ModalDialog("Sucesso!", r);
+                updateBeneficiariosList();
             }
     });
 });

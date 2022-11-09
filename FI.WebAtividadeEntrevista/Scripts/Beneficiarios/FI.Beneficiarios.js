@@ -54,7 +54,6 @@ $(document).ready(function () {
                     function (r) {
                         postClienteFuncionou = true;
                         clientId = r.Id;
-                        var test = $("#Nome_Ben").val();
 
                         if (postClienteFuncionou) {
                             $.ajax({
@@ -76,13 +75,12 @@ $(document).ready(function () {
                                     function (r) {
                                         ModalDialog("Sucesso!", r)
                                         $("#formCadastroBeneficiario")[0].reset();
+                                        updateBeneficiariosList();
                                     }
                             });
                         }
 
                         ModalDialog("Sucesso!", r.Mensagem)
-                        $("#formCadastro")[0].reset();
-                        location.reload();
                     }
             });
         }

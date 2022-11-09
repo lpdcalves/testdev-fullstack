@@ -1,6 +1,7 @@
 ﻿
-$(document).ready(function () {
+$(document).ready(updateBeneficiariosList);
 
+function updateBeneficiariosList() {
     var clientID;
     if (obj) {
         clientID = obj.Id;
@@ -39,4 +40,4 @@ $(document).ready(function () {
     //Load student list from server
     if (document.getElementById("gridBeneficiarios"))
         $('#gridBeneficiarios').jtable('load');
-})
+}
