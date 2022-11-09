@@ -25,9 +25,11 @@ $(document).ready(function () {
                     ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
             },
             success:
-            function (r) {
-                ModalDialog("Sucesso!", r.Mensagem)
-                $("#formCadastro")[0].reset();
+                function (r) {
+                    InserirBeneficiarios(r.Id);
+                    ModalDialog("Sucesso!", r.Mensagem);
+                    $("#formCadastro")[0].reset();
+                    window.location.href = `${urlAlteracao}/${r.Id}`;
             }
         });
     })

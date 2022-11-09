@@ -20,10 +20,10 @@ $(document).ready(function () {
                     ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
             },
             success:
-                function (r) {
+            function (r) {
                 $('#alterarBeneficiariosModal').modal('hide');
                 ModalDialog("Sucesso!", r)
-                $("#formAlterarBeneficiario")[0].reset();
+                    $("#formCadastroBeneficiario")[0].reset();
                 updateBeneficiariosList();
             }
         });

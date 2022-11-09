@@ -1,96 +1,78 @@
 ﻿
+var beneficiariosInserir = [];
+
 $(document).ready(function () {
 
     $('#formCadastroBeneficiario').submit(function (e) {
         e.preventDefault();
 
-        let postClienteFuncionou = false;
-        let clientId;
+        // Se obj existe, significa que estamos alterando um cliente já existente
+        // Portanto, a inserção de beneficiarios é feita diretamente um a um
+        if (typeof obj != 'undefined') {
+            if (obj) {
+                beneficiarioNovo = {
+                    Nome: $("#Nome_Ben").val(),
+                    CPF: $("#CPF_Ben").val(),
+                };
+                beneficiariosInserir.push(beneficiarioNovo);
 
-        let variaveisValidadas = true;
-        let variaveis = [];
-        variaveis.push($("#Nome").val());
-        variaveis.push($("#CPF").val());
-        variaveis.push($("#CEP").val());
-        variaveis.push($("#Email").val());
-        variaveis.push($("#Sobrenome").val());
-        variaveis.push($("#Nacionalidade").val());
-        variaveis.push($("#Estado").val());
-        variaveis.push($("#Cidade").val());
-        variaveis.push($("#Logradouro").val());
-        variaveis.push($("#Telefone").val());
-
-        for (var i = 0; i < variaveis.length; i++) {
-            if (variaveis[i] == "") {
-                variaveisValidadas = false;
-                break;
+                InserirBeneficiarios(obj.Id);
             }
         }
-
-        if (variaveisValidadas) {
-            $.ajax({
-                url: urlPost,
-                method: "POST",
-                data: {
-                    "NOME": $("#Nome").val(),
-                    "CPF": $("#CPF").val(),
-                    "CEP": $("#CEP").val(),
-                    "Email": $("#Email").val(),
-                    "Sobrenome": $("#Sobrenome").val(),
-                    "Nacionalidade": $("#Nacionalidade").val(),
-                    "Estado": $("#Estado").val(),
-                    "Cidade": $("#Cidade").val(),
-                    "Logradouro": $("#Logradouro").val(),
-                    "Telefone": $("#Telefone").val()
-                },
-                error:
-                    function (r) {
-                        if (r.status == 400)
-                            ModalDialog("Ocorreu um erro", r.responseJSON);
-                        else if (r.status == 500)
-                            ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
-                    },
-                success:
-                    function (r) {
-                        postClienteFuncionou = true;
-                        clientId = r.Id;
-
-                        if (postClienteFuncionou) {
-                            $.ajax({
-                                url: urlPostBen,
-                                method: "POST",
-                                data: {
-                                    "NOME": $("#Nome_Ben").val(),
-                                    "CPF": $("#CPF_Ben").val(),
-                                    "IDCLIENTE": clientId,
-                                },
-                                error:
-                                    function (r) {
-                                        if (r.status == 400)
-                                            ModalDialog("Ocorreu um erro", r.responseJSON);
-                                        else if (r.status == 500)
-                                            ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
-                                    },
-                                success:
-                                    function (r) {
-                                        ModalDialog("Sucesso!", r)
-                                        $("#formCadastroBeneficiario")[0].reset();
-                                        updateBeneficiariosList();
-                                    }
-                            });
-                        }
-
-                        ModalDialog("Sucesso!", r.Mensagem)
-                    }
-            });
-        }
         else {
-            ModalDialog("Formulário incompleto", "Os dados do cliente não estão completos, preencha todos os campos corretamente e depois tente inserir um beneficiario");
+            beneficiarioNovo = {
+                Nome: $("#Nome_Ben").val(),
+                CPF: $("#CPF_Ben").val(),
+            };
+
+            if (!ChecarCpfExisteLocal(beneficiarioNovo.CPF)) {
+                beneficiariosInserir.push(beneficiarioNovo);
+                ModalDialog("Beneficiário Inserido", `O beneficiário de Nome: ${beneficiarioNovo.Nome} e CPF: ${beneficiarioNovo.CPF} foi inserido na lista de beneficiários local. Quando a inserção do cliente for concluída no botão "Salvar" da tela de cadastro de clientes seu beneficiário será persistido.`);
+                $("#formCadastroBeneficiario")[0].reset();
+            }
+            else {
+                ModalDialog("CPF já existente", `Já existe um beneficiario cadastrado com o CPF: ${beneficiarioNovo.CPF}. Insira um novo CPF.`);
+            }
         }
-        
     })
     
 })
+
+function InserirBeneficiarios(idCliente) {
+    for (var i = 0; i < beneficiariosInserir.length; i++) {
+        $.ajax({
+            url: urlPostBen,
+            method: "POST",
+                data: {
+                    "NOME": beneficiariosInserir[i].Nome,
+                    "CPF": beneficiariosInserir[i].CPF,
+                    "IDCLIENTE": idCliente,
+            },
+            error:
+                function (r) {
+                    if (r.status == 400)
+                        ModalDialog("Ocorreu um erro", r.responseJSON);
+                    else if (r.status == 500)
+                        ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                },
+            success:
+                function (r) {
+                    updateBeneficiariosList();
+                }
+        });
+    }
+    // Limpando a lista de beneficiarios local após inseri-los
+    beneficiariosInserir = [];
+}
+
+function ChecarCpfExisteLocal(cpf) {
+    for (var i = 0; i < beneficiariosInserir.length; i++) {
+        if (beneficiariosInserir[i].CPF == cpf) {
+            return true
+        }
+    }
+    return false;
+}
 
 function ModalDialog(titulo, texto) {
     var random = Math.random().toString().replace('.', '');
